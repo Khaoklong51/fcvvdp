@@ -41,7 +41,7 @@ terms of wall clock time. In terms of user time, fcvvdp is ~15x more efficient.
 
 Compilation requires:
 
-- [zlib-rs](https://github.com/trifectatechfoundation/zlib-rs)
+- [zlib-ng](https://github.com/zlib-ng/zlib-ng) (`-DZLIB_COMPAT` mode recommend)
 - [libunwind](https://github.com/libunwind/libunwind)
 - [Zig](https://ziglang.org/) 0.15.x
 - macOS, Linux, or Unix-like operating system

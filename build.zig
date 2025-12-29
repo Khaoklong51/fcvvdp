@@ -69,6 +69,7 @@ pub fn build(b: *std.Build) void {
         .flags = if (flto) &cvvdp_flags ++ &[_][]const u8{"-flto=thin"} else &cvvdp_flags,
     });
     spng.root_module.addIncludePath(b.path("third-party/"));
+    spng.root_module.linkSystemLibrary("zlib", .{ .preferred_link_mode = .static, .use_pkg_config = .yes });
 
     // 'fcvvdp' executable
     const cvvdpenc = b.addExecutable(.{
@@ -85,7 +86,7 @@ pub fn build(b: *std.Build) void {
     cvvdpenc.root_module.addIncludePath(b.path("."));
     cvvdpenc.root_module.linkLibrary(cvvdp);
     cvvdpenc.root_module.linkLibrary(spng);
-    cvvdpenc.root_module.linkSystemLibrary("z_rs", .{ .preferred_link_mode = .static });
-    cvvdpenc.root_module.linkSystemLibrary("unwind", .{ .preferred_link_mode = .static });
+    cvvdpenc.root_module.linkSystemLibrary("zlib", .{ .preferred_link_mode = .static, .use_pkg_config = .yes });
+    cvvdpenc.root_module.linkSystemLibrary("unwind", .{ .preferred_link_mode = .static, .use_pkg_config = .yes });
     b.installArtifact(cvvdpenc);
 }
